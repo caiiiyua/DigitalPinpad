@@ -11,5 +11,4 @@ class DigitalPinApplication : Application(), DaggerComponentProvider {
             .applicationContext(this)
             .build()
     }
-
 }

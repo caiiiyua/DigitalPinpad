@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import caiiiyua.digitalpin.common.di.component.ApplicationComponent
 
 interface DaggerComponentProvider {
-
     val component: ApplicationComponent
 }
 
