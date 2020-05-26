@@ -3,9 +3,10 @@ package caiiiyua.digitalpin.features.pinpad.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import caiiiyua.digitalpin.common.usecase.GeneratePinBlockUsecase
 import javax.inject.Inject
 
-class PinpadViewModel @Inject constructor() : ViewModel() {
+class PinpadViewModel @Inject constructor(private val generatePinBlockUsecase: GeneratePinBlockUsecase) : ViewModel() {
 
     companion object {
         const val MIN_PIN_CODES = 4
@@ -45,6 +46,6 @@ class PinpadViewModel @Inject constructor() : ViewModel() {
 
     fun computePin(pincode: String) {
         pinpadViewState.value = PinpadViewState.COMPUTED_PIN
-        pinBlock.value = pincode
+        pinBlock.value = generatePinBlockUsecase.getPinBlock(pincode)
     }
 }
