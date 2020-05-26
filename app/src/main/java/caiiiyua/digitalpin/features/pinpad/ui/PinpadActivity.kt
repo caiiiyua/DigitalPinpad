@@ -1,17 +1,19 @@
-package caiiiyua.digitalpin
+package caiiiyua.digitalpin.features.pinpad.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import caiiiyua.digitalpin.ui.main.MainFragment
+import caiiiyua.digitalpin.R
 
-class MainActivity : AppCompatActivity() {
+class PinpadActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
+                .replace(R.id.container,
+                    PinpadFragment.newInstance()
+                )
                 .commitNow()
         }
     }
