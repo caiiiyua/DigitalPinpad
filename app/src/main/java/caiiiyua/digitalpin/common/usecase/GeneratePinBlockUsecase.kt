@@ -6,6 +6,14 @@ interface GeneratePinBlockUsecase {
     fun getPinBlock(pincode: String, pan: String = PAN): String
 }
 
+/**
+ * The Pin Block implementation is basically on
+ * https://www.eftlab.com/knowledge-base/261-complete-list-of-pin-blocks-in-payments/
+ * But due to the description of random values for ISO-3 in this doc is not consistent,
+ * says the random values from 10 - 15, but in the calculation steps the random values from X'0' - X'F',
+ * So double checked at https://www.ibm.com/support/knowledgecenter/linuxonibm/com.ibm.linux.z.wskc.doc/wskc_r_appdiso3.html
+ * The implementation below is using the random values from 10 - 15 (X'A' - X'F')
+ */
 class GeneratePinBlockUsecaseImpl : GeneratePinBlockUsecase {
 
     companion object {
