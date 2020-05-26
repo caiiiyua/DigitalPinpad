@@ -17,7 +17,6 @@ class PinpadViewModel @Inject constructor(private val generatePinBlockUsecase: G
         IDLE,
         INVALID_PIN,
         VALID_PIN,
-        COMPUTED_PIN,
     }
 
     private val pinpadViewState = MutableLiveData<PinpadViewState>()
@@ -45,7 +44,6 @@ class PinpadViewModel @Inject constructor(private val generatePinBlockUsecase: G
     private fun checkPincodeLength(pincode: String) = pincode.length in MIN_PIN_CODES..MAX_PIN_CODES
 
     fun computePin(pincode: String) {
-        pinpadViewState.value = PinpadViewState.COMPUTED_PIN
         pinBlock.value = generatePinBlockUsecase.getPinBlock(pincode)
     }
 }

@@ -12,7 +12,7 @@
       android:id="@+id/pin_block_label"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="PIN BLOCK: "
+      android:text="@string/label_pin_block"
       android:layout_marginEnd="16dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="@+id/pinpad_enter"
@@ -33,7 +33,7 @@
       android:minEms="4"
       android:maxEms="12"
       android:inputType="number"
-      android:hint="Please Enter 4 - 12 digit pin."
+      android:hint="@string/label_pincode_hint"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/pin_block_label" />

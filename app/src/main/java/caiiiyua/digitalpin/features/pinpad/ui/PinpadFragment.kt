@@ -8,6 +8,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import caiiiyua.digitalpin.R
 import caiiiyua.digitalpin.common.di.injector
 import caiiiyua.digitalpin.features.pinpad.viewmodel.PinpadViewModel
@@ -20,7 +21,7 @@ class PinpadFragment : Fragment() {
     }
 
     private val viewModel: PinpadViewModel by lazy {
-        injector.pinpadViewModelFactory().create(PinpadViewModel::class.java)
+        ViewModelProvider(this, injector.pinpadViewModelFactory()).get(PinpadViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -42,7 +43,7 @@ class PinpadFragment : Fragment() {
         viewModel.getPinpadViewState().observe(viewLifecycleOwner, Observer { pinpadState ->
             when (pinpadState) {
                 PinpadViewModel.PinpadViewState.INVALID_PIN -> {
-                    pinpad_enter.error = "Only 4 to 12 pin codes are allowed here!"
+                    pinpad_enter.error = getString(R.string.error_pincode)
                 }
                 else -> pinpad_enter.error = null
             }
