@@ -46,7 +46,13 @@ dependencies {
   implementation "com.google.dagger:dagger:$versionDagger"
   kapt "com.google.dagger:dagger-compiler:$versionDagger"
 
+  // Unit test
   testImplementation 'junit:junit:4.12'
+  testImplementation 'androidx.test:core:1.2.0'
+  testImplementation 'androidx.arch.core:core-testing:2.1.0'
+  testImplementation "io.mockk:mockk:1.9.3"
+  kaptTest "com.google.dagger:dagger-compiler:$versionDagger"
+
   androidTestImplementation 'androidx.test.ext:junit:1.1.1'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

@@ -1,5 +1,6 @@
 package caiiiyua.digitalpin.common.usecase
 
+import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
 class GeneratePinBlockUsecaseTest {
@@ -18,17 +19,17 @@ class GeneratePinBlockUsecaseTest {
         val panBlock = 0x0000222333444555
 
         val pinBlock = generatePinBlockUsecase.getPinBlock(pincode, pan)
-        assert(!pinBlock.isNullOrEmpty())
+        assertEquals(false, pinBlock.isNullOrEmpty())
 
         val ipb = pinBlock.toLongOrNull(HEX_RADIX)?.xor(panBlock)?.toString(HEX_RADIX)
         val ipbVersion = ipb?.substring(0, 1)?.toInt()
-        assert(ipbVersion == PB_IOS_3_VERSION) { "expected $PB_IOS_3_VERSION, but got $ipbVersion" }
+        assertEquals(PB_IOS_3_VERSION, ipbVersion)
 
         val pincodeLen = ipb?.substring(1, 2)?.toInt()?: 0
-        assert(pincodeLen == pincode.length) { "expected ${pincode.length}, but got $pincodeLen" }
+        assertEquals(pincode.length, pincodeLen)
 
         val pincodeDecode = ipb?.substring(2 until (pincodeLen + 2))
-        assert(pincodeDecode == pincode) { "expected $pincode, but got $pincodeDecode" }
+        assertEquals(pincode, pincodeDecode)
     }
 
     @Test
@@ -37,30 +38,30 @@ class GeneratePinBlockUsecaseTest {
         val panBlock = 0x0000222233334444
 
         val pinBlock = generatePinBlockUsecase.getPinBlock(pincode)
-        assert(!pinBlock.isNullOrEmpty())
+        assertEquals(false, pinBlock.isNullOrEmpty())
 
         val ipb = pinBlock.toLongOrNull(HEX_RADIX)?.xor(panBlock)?.toString(HEX_RADIX)
         val ipbVersion = ipb?.substring(0, 1)?.toInt()
-        assert(ipbVersion == PB_IOS_3_VERSION) { "expected $PB_IOS_3_VERSION, but got $ipbVersion" }
+        assertEquals(PB_IOS_3_VERSION, ipbVersion)
 
         val pincodeLen = ipb?.substring(1, 2)?.toInt()?: 0
-        assert(pincodeLen == pincode.length) { "expected ${pincode.length}, but got $pincodeLen" }
+        assertEquals(pincode.length, pincodeLen)
 
         val pincodeDecode = ipb?.substring(2 until (pincodeLen + 2))
-        assert(pincodeDecode == pincode) { "expected $pincode, but got $pincodeDecode" }
+        assertEquals(pincode, pincodeDecode)
     }
 
     @Test
     fun testTooShortPincode() {
         val pincode = ""
         val pinBlock = generatePinBlockUsecase.getPinBlock(pincode)
-        assert(pinBlock.isNullOrEmpty())
+        assertEquals(true, pinBlock.isNullOrEmpty())
     }
 
     @Test
     fun testTooLongPincode() {
         val pincode = "12345678901234567890"
         val pinBlock = generatePinBlockUsecase.getPinBlock(pincode)
-        assert(pinBlock.isNullOrEmpty())
+        assertEquals(true, pinBlock.isNullOrEmpty())
     }
 }
